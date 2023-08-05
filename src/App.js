@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
-import "./App.css";
+import FormHeader from "./components/FormHeader/FormHeader";
 
 function App() {
   return (
     <div className="App">
+      <FormHeader />
       <h1>HELLO</h1>
     </div>
   );
