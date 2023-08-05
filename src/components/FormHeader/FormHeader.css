@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 5px 15px;
-  background-color: #fff;
+  margin: 5px 15px;
 }
 .form_header_left {
   display: flex;
@@ -26,11 +25,35 @@
   color: #202124;
   font-size: 20px;
 }
+
+.form_name {
+  position: relative;
+  background: transparent;
+  width: 500px;
+  border: none;
+  outline: none;
+
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
 .form_name:focus {
   border-bottom: 1px solid black;
 }
-I .form_header_right {
+
+.form_header_right {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.send-button {
+  background-color: #1976d2;
+  color: #ffffff;
+}
+
+.save-and-proceed-button {
+  color: #1976d2;
+  background-color: #ffffff;
+  border: 1px solid #1976d2;
 }
