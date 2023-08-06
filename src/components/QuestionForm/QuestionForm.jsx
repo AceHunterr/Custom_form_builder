@@ -45,7 +45,7 @@ const QuestionForm = () => {
   ]);
 
   function questionsUI() {
-    return questions.map((ques, i) => {
+    return questions.map((ques, i) => (
       <Accordion expanded={ques.open} className={ques.open ? "add border" : ""}>
         <AccordionSummary
           aria-controls="panella-content"
@@ -166,8 +166,8 @@ const QuestionForm = () => {
             ))}
           </AccordionDetails>
         </div>
-      </Accordion>;
-    });
+      </Accordion>
+    ));
   }
 
   return (
