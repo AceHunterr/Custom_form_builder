@@ -50,6 +50,73 @@ const QuestionForm = () => {
     setQuestions(newQuestion);
   }
 
+  function changeOptionValue(text, i, j) {
+    var optionsQuestion = [...questions];
+    optionsQuestion[i].options[j].optionText = text;
+    setQuestions(optionsQuestion);
+  }
+
+  function addQuestionType(i, type) {
+    let qs = [...questions];
+    qs[i].questionType = type;
+    setQuestions(qs);
+  }
+
+  function removeOption(i, j) {
+    var RemoveOptionQuestion = [...questions];
+    if (RemoveOptionQuestion[i].options.length > 1) {
+      RemoveOptionQuestion[i].options.splice(j, 1);
+      setQuestions(RemoveOptionQuestion);
+    }
+  }
+
+  function addOption(i) {
+    var optionsOfQuestion = [...questions];
+    if (optionsOfQuestion[i].options.length < 5) {
+      optionsOfQuestion[i].options.push({
+        optionText: "Option" + (optionsOfQuestion[i].options.length + 1),
+      });
+    } else {
+      alert("Cannot add more than 5 options");
+    }
+    setQuestions(optionsOfQuestion);
+  }
+
+  function copyQuestion(i) {
+    // expandCloseAll();
+    let qs = [...questions];
+    var newQuestion = qs[i];
+    setQuestions([...questions, newQuestion]);
+  }
+
+  function deleteQuestion(i) {
+    let qs = [...questions];
+    if (questions.length > 1) {
+      qs.splice(i, 1);
+    }
+    setQuestions(qs);
+  }
+
+  function requiredQuestion(i) {
+    var reqQuestion = [...questions];
+    reqQuestion[i].required = !reqQuestion[i].required;
+    alert(reqQuestion[i].required + " " + i);
+    setQuestions(reqQuestion);
+  }
+
+  function addMoreQuestionField() {
+    setQuestions([
+      ...questions,
+      {
+        questionText: "Question",
+        questionType: "radio",
+        options: [{ optionText: "Option 1" }],
+        open: true,
+        required: false,
+      },
+    ]);
+  }
+
   function questionsUI() {
     return questions.map((ques, i) => (
       <Accordion expanded={ques.open} className={ques.open ? "add border" : ""}>
@@ -127,17 +194,35 @@ const QuestionForm = () => {
                 className="select"
                 style={{ color: "#5f6368", fontSize: "13px" }}
               >
-                <MenuItem id="text" value="Text">
+                <MenuItem
+                  id="text"
+                  value="Text"
+                  onClick={() => {
+                    addQuestionType(i, "text");
+                  }}
+                >
                   <SubjectIcon style={{ marginRight: "10px" }} /> Paragraph
                 </MenuItem>
-                <MenuItem id="checkbox" value="Checkbox">
+                <MenuItem
+                  id="checkbox"
+                  value="Checkbox"
+                  onClick={() => {
+                    addQuestionType(i, "checkbox");
+                  }}
+                >
                   <CheckBoxIcon
                     style={{ marginRight: "10px", color: "#70757a" }}
                     checked
                   />
                   Checkboxes
                 </MenuItem>
-                <MenuItem id="radio" value="Radio">
+                <MenuItem
+                  id="radio"
+                  value="Radio"
+                  onClick={() => {
+                    addQuestionType(i, "radio");
+                  }}
+                >
                   <Radio
                     style={{ marginRight: "10px", color: "#70757a" }}
                     checked
@@ -163,11 +248,18 @@ const QuestionForm = () => {
                     className="text_input"
                     placeholder="option"
                     value={ques.options[j].optionText}
+                    onChange={(e) => {
+                      changeOptionValue(e.target.value, i, j);
+                    }}
                   ></input>
                 </div>
                 <CropOriginalIcon style={{ color: "#5f6368" }} />
                 <IconButton aria-label="delete">
-                  <CloseIcon />
+                  <CloseIcon
+                    onClick={() => {
+                      removeOption(i, j);
+                    }}
+                  />
                 </IconButton>
               </div>
             ))}
@@ -199,6 +291,9 @@ const QuestionForm = () => {
                       ></input>
                       <Button
                         size="small"
+                        onClick={() => {
+                          addOption(i);
+                        }}
                         style={{
                           textTransform: "none",
                           color: "#4285f4",
@@ -238,16 +333,32 @@ const QuestionForm = () => {
                 </Button>
               </div>
               <div className="add_question_bottom">
-                <IconButton aria-label="Copy">
+                <IconButton
+                  aria-label="Copy"
+                  onClick={() => {
+                    copyQuestion(i);
+                  }}
+                >
                   <FilterNoneIcon />
                 </IconButton>
-                <IconButton aria-label="delete">
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => {
+                    deleteQuestion(i);
+                  }}
+                >
                   <BsTrash />
                 </IconButton>
                 <span style={{ color: "#5f6368", fontsize: "13px" }}>
                   Required
                 </span>
-                <Switch name="checkedA" color="primary" />
+                <Switch
+                  name="checkedA"
+                  color="primary"
+                  onClick={() => {
+                    requiredQuestion(i);
+                  }}
+                />
                 <IconButton>
                   <MoreVertIcon />
                 </IconButton>
@@ -255,7 +366,11 @@ const QuestionForm = () => {
             </div>
           </AccordionDetails>
           <div className="question_edit">
-            <AddCircleOutlineIcon className="edit" style={{ fontSize: 38 }} />
+            <AddCircleOutlineIcon
+              className="edit"
+              style={{ fontSize: 38 }}
+              onClick={addMoreQuestionField}
+            />
             <OndemandVideoIcon className="edit" style={{ fontSize: 38 }} />
             <CropOriginalIcon className="edit" style={{ fontSize: 38 }} />
             <TextFieldsIcon className="edit" style={{ fontSize: 38 }} />
