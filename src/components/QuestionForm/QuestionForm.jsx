@@ -18,10 +18,10 @@ import { FCRightUp } from "react-icons/fc";
 import CloseIcon from "@material-ui/icons/Close";
 import Radio from "@material-ui/core/Radio";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Typography from "@mui/material/Typography"; // Import Typography from Material-UI
-
-import { MenuItem } from "@material-ui/core"; // Import MenuItem from Material-UI
+import Typography from "@mui/material/Typography";
+import { MenuItem } from "@material-ui/core";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import NorthEastIcon from "@mui/icons-material/NorthEast";
 
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import ShortTextIcon from "@material-ui/icons/ShortText";
@@ -43,6 +43,12 @@ const QuestionForm = () => {
       required: false,
     },
   ]);
+
+  function changeQuestion(text, i) {
+    var newQuestion = [...questions];
+    newQuestion[i].questionText = text;
+    setQuestions(newQuestion);
+  }
 
   function questionsUI() {
     return questions.map((ques, i) => (
@@ -112,6 +118,9 @@ const QuestionForm = () => {
                 className="question"
                 placeholder="Question"
                 value={ques.questionText}
+                onChange={(e) => {
+                  changeQuestion(e.target.value, i);
+                }}
               />
               <CropOriginalIcon style={{ color: "#5f6368" }} />
               <Select
@@ -119,22 +128,20 @@ const QuestionForm = () => {
                 style={{ color: "#5f6368", fontSize: "13px" }}
               >
                 <MenuItem id="text" value="Text">
-                  {" "}
                   <SubjectIcon style={{ marginRight: "10px" }} /> Paragraph
                 </MenuItem>
                 <MenuItem id="checkbox" value="Checkbox">
                   <CheckBoxIcon
                     style={{ marginRight: "10px", color: "#70757a" }}
                     checked
-                  />{" "}
+                  />
                   Checkboxes
                 </MenuItem>
                 <MenuItem id="radio" value="Radio">
-                  {" "}
                   <Radio
                     style={{ marginRight: "10px", color: "#70757a" }}
                     checked
-                  />{" "}
+                  />
                   Multiple Choice
                 </MenuItem>
               </Select>
@@ -164,7 +171,95 @@ const QuestionForm = () => {
                 </IconButton>
               </div>
             ))}
+
+            {ques.options.length < 5 ? (
+              <div className="add_question_body">
+                <FormControlLabel
+                  disabled
+                  control={
+                    ques.questionType != "text" ? (
+                      <input
+                        type={ques.questionType}
+                        color="primary"
+                        inputProps={{ "aria-label": "secondary checkbox" }}
+                        style={{ marginLeft: "10px", marginRight: "10px" }}
+                        disabled
+                      />
+                    ) : (
+                      <ShortTextIcon style={{ marginRight: "10px" }} />
+                    )
+                  }
+                  label={
+                    <div>
+                      <input
+                        type="text"
+                        className="text_input"
+                        style={{ fontSize: "13px", width: "60px" }}
+                        placeholder="Add other"
+                      ></input>
+                      <Button
+                        size="small"
+                        style={{
+                          textTransform: "none",
+                          color: "#4285f4",
+                          fontsize: "13px",
+                          fontweight: "600",
+                        }}
+                      >
+                        Add Option
+                      </Button>
+                    </div>
+                  }
+                />
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="add_footer">
+              <div className="add_question_bottom_left">
+                <Button
+                  size="small"
+                  style={{
+                    textTransform: "none",
+                    color: "#4285f4",
+                    fontsize: "13px",
+                    fontweight: "600",
+                  }}
+                >
+                  <NorthEastIcon
+                    style={{
+                      border: "2px solid #4285f4",
+                      padding: "2px",
+                      marginRight: "8px",
+                    }}
+                  />
+                  Answer key
+                </Button>
+              </div>
+              <div className="add_question_bottom">
+                <IconButton aria-label="Copy">
+                  <FilterNoneIcon />
+                </IconButton>
+                <IconButton aria-label="delete">
+                  <BsTrash />
+                </IconButton>
+                <span style={{ color: "#5f6368", fontsize: "13px" }}>
+                  Required
+                </span>
+                <Switch name="checkedA" color="primary" />
+                <IconButton>
+                  <MoreVertIcon />
+                </IconButton>
+              </div>
+            </div>
           </AccordionDetails>
+          <div className="question_edit">
+            <AddCircleOutlineIcon className="edit" style={{ fontSize: 38 }} />
+            <OndemandVideoIcon className="edit" style={{ fontSize: 38 }} />
+            <CropOriginalIcon className="edit" style={{ fontSize: 38 }} />
+            <TextFieldsIcon className="edit" style={{ fontSize: 38 }} />
+          </div>
         </div>
       </Accordion>
     ));
