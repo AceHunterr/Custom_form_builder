@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import RichTextEditor from "../RichTextEditor";
 import ClozedQuestionRenderer from "./ClozedQuestionRenderer";
+import axios from "axios";
 
 import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
@@ -44,6 +45,19 @@ const ClozeQuestion = () => {
 
   const [previewContent, setPreviewContent] = useState("");
   const [underlinedWords, setUnderlinedWords] = useState([]);
+
+  const saveClozeQuestions = () => {
+    axios
+      .post("http://localhost:5000/api/cloze-questions", {
+        formData: clozeQuestions,
+      })
+      .then((response) => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  };
 
   //   function changeQuestion(text, i) {
   //     // var newQuestion = [...clozeQuestions];
@@ -282,6 +296,7 @@ const ClozeQuestion = () => {
                 </IconButton>
               </div>
             </div>
+            <button onClick={saveClozeQuestions}>Save Form Data</button>
           </AccordionDetails>
           <div className="question_edit">
             <AddCircleOutlineIcon

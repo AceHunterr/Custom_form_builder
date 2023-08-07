@@ -38,26 +38,25 @@ const ClozeQuestion = mongoose.model("ClozeQuestion", clozeQuestionSchema);
 app.use(cors());
 app.use(bodyParser.json());
 
-// API endpoint to get all clozeQuestions data
-app.get("/api/cloze-questions", async (req, res) => {
+app.post("/api/cloze-questions", async (req, res) => {
+  const { formData } = req.body;
+  console.log("Server post hit");
+
   try {
-    const clozeQuestions = await ClozeQuestion.find();
-    console.log("Reached");
-    res.json({ formData: clozeQuestions });
+    const newClozeQuestions = await ClozeQuestion.insertMany(formData);
+    res.json({ message: "Data saved successfully!", data: newClozeQuestions });
   } catch (error) {
-    console.error("Error fetching form data:", error);
+    console.error("Error saving data:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// API endpoint to create a new clozeQuestion
-app.post("/api/cloze-questions", async (req, res) => {
+app.get("/api/cloze-questions", async (req, res) => {
   try {
-    const newClozeQuestion = new ClozeQuestion(req.body);
-    await newClozeQuestion.save();
-    res.json({ message: "Cloze question created successfully" });
+    const allClozeQuestions = await ClozeQuestion.find();
+    res.json({ data: allClozeQuestions });
   } catch (error) {
-    console.error("Error creating cloze question:", error);
+    console.error("Error fetching form data:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
