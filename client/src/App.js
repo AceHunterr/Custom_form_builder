@@ -15,13 +15,25 @@ const ClozeQuestionPage = () => {
     </>
   );
 };
+const ClozeQuestionRendererPage = () => {
+  return (
+    <>
+      <FormHeader />
+      <ClozedQuestionRenderer />
+    </>
+  );
+};
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route exact path="/" element={<ClozeQuestionPage />} />
-          {/* <Route exact path="/renderer" element={<ClozedQuestionRenderer />} /> */}
+          <Route
+            exact
+            path="/renderer"
+            element={<ClozeQuestionRendererPage />}
+          />
         </Routes>
       </Router>
 

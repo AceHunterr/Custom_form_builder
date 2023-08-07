@@ -59,23 +59,6 @@ const ClozeQuestion = () => {
       });
   };
 
-  //   function changeQuestion(text, i) {
-  //     // var newQuestion = [...clozeQuestions];
-  //     // newQuestion[i].questionText = text;
-  //     // setClozeQuestions(newQuestion);
-
-  //     const regex = /<u>(.*?)<\/u>/g;
-  //     const matches = text.match(regex);
-  //     if (matches) {
-  //       const words = matches.map((match) => match.replace(/<\/?u>/g, ""));
-  //       setUnderlinedWords(words);
-  //     }
-
-  //     var newQuestion = [...clozeQuestions];
-  //     newQuestion[i].questionText = text;
-  //     setClozeQuestions(newQuestion);
-  //   }
-
   function changeQuestion(text, i) {
     const regex = /<u>(.*?)<\/u>/g;
     const matches = text.match(regex);
@@ -211,15 +194,6 @@ const ClozeQuestion = () => {
               }}
             />
             <div className="add_question_top">
-              {/* <input
-                type="text"
-                className="question"
-                placeholder="Question"
-                value={ques.questionText}
-                onChange={(e) => {
-                  changeQuestion(e.target.value, i);
-                }}
-              /> */}
               <CropOriginalIcon
                 style={{ color: "#5f6368", marginBottom: "20px" }}
               />
@@ -296,7 +270,15 @@ const ClozeQuestion = () => {
                 </IconButton>
               </div>
             </div>
-            <button onClick={saveClozeQuestions}>Save Form Data</button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={saveClozeQuestions}
+              style={{ width: "50%" }}
+            >
+              Save Form Data
+            </Button>
+            {/* <button onClick={saveClozeQuestions}>Save Form Data</button> */}
           </AccordionDetails>
           <div className="question_edit">
             <AddCircleOutlineIcon
@@ -336,7 +318,7 @@ const ClozeQuestion = () => {
             </div>
 
             {questionsUI()}
-            <ClozedQuestionRenderer formData={clozeQuestions} />
+            {/* <ClozedQuestionRenderer formData={clozeQuestions} /> */}
           </div>
         </div>
       </div>
