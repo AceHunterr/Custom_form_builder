@@ -64,6 +64,11 @@ const ClozeQuestion = () => {
   function changeQuestion(text, i) {
     const regex = /<u>(.*?)<\/u>/g;
     const matches = text.match(regex);
+
+    const previewSentence = text.replace(regex, (match, word) => {
+      return "___".repeat(word.length);
+    });
+
     if (matches) {
       const words = matches.map((match) => match.replace(/<\/?u>/g, ""));
       const updatedQuestions = clozeQuestions.map((question, index) => {
@@ -72,7 +77,7 @@ const ClozeQuestion = () => {
             ...question,
             questionText: text,
             underlinedWords: words,
-            previewContent: text,
+            previewContent: previewSentence,
           };
         }
         return question;
@@ -84,21 +89,15 @@ const ClozeQuestion = () => {
         const updatedQuestions = [...prevQuestions];
         updatedQuestions[i].questionText = text;
         updatedQuestions[i].underlinedWords = [];
-        updatedQuestions[i].previewContent = text;
+        updatedQuestions[i].previewContent = previewSentence;
         return updatedQuestions;
       });
       setPreviewContent(text);
     }
   }
 
-  function addQuestionType(i, type) {
-    let qs = [...clozeQuestions];
-    qs[i].questionType = type;
-    setClozeQuestions(qs);
-  }
-
+  // Question Specific Functions
   function copyQuestion(i) {
-    // expandCloseAll();
     let qs = [...clozeQuestions];
     var newQuestion = qs[i];
     setClozeQuestions([...clozeQuestions, newQuestion]);
@@ -119,6 +118,7 @@ const ClozeQuestion = () => {
     setClozeQuestions(reqQuestion);
   }
 
+  // Generalised Question Field
   function addMoreQuestionField() {
     setClozeQuestions([
       ...clozeQuestions,
