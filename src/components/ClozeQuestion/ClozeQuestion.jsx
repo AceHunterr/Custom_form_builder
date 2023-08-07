@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import RichTextEditor from "../RichTextEditor";
 
 import Select from "@material-ui/core/Select";
 import Switch from "@material-ui/core/Switch";
@@ -37,6 +38,8 @@ const ClozeQuestion = () => {
       required: false,
     },
   ]);
+
+  const [previewContent, setPreviewContent] = useState("");
 
   function changeQuestion(text, i) {
     var newQuestion = [...clozeQuestions];
@@ -147,10 +150,20 @@ const ClozeQuestion = () => {
             ""
           )}
         </AccordionSummary>
+        {/* <RichTextEditor /> */}
+
         <div className="question_boxes">
           <AccordionDetails className="add_question">
+            <h4 style={{ marginBottom: "10px" }}>Sentence</h4>
+            <RichTextEditor
+              value={ques.questionText}
+              onChange={(value) => {
+                changeQuestion(value, i);
+                setPreviewContent(value);
+              }}
+            />
             <div className="add_question_top">
-              <input
+              {/* <input
                 type="text"
                 className="question"
                 placeholder="Question"
@@ -158,8 +171,17 @@ const ClozeQuestion = () => {
                 onChange={(e) => {
                   changeQuestion(e.target.value, i);
                 }}
+              /> */}
+              <CropOriginalIcon
+                style={{ color: "#5f6368", marginBottom: "20px" }}
               />
-              <CropOriginalIcon style={{ color: "#5f6368" }} />
+            </div>
+
+            <div className="preview_field">
+              <h4 style={{ marginTop: "10px", marginBottom: "10px" }}>
+                Preview
+              </h4>
+              <div dangerouslySetInnerHTML={{ __html: previewContent }} />
             </div>
 
             <div className="add_footer">
