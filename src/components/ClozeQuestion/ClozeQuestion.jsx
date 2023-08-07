@@ -30,34 +30,78 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
 
 const ClozeQuestion = () => {
-  const [clozeQuestions, setclozeQuestions] = useState([
+  const [clozeQuestions, setClozeQuestions] = useState([
     {
       questionText: "A quick brown box jumps over the fence",
       questionType: "fill_blank",
       open: true,
       required: false,
+      underlinedWords: [],
+      previewContent: "",
     },
   ]);
 
   const [previewContent, setPreviewContent] = useState("");
+  const [underlinedWords, setUnderlinedWords] = useState([]);
+
+  //   function changeQuestion(text, i) {
+  //     // var newQuestion = [...clozeQuestions];
+  //     // newQuestion[i].questionText = text;
+  //     // setClozeQuestions(newQuestion);
+
+  //     const regex = /<u>(.*?)<\/u>/g;
+  //     const matches = text.match(regex);
+  //     if (matches) {
+  //       const words = matches.map((match) => match.replace(/<\/?u>/g, ""));
+  //       setUnderlinedWords(words);
+  //     }
+
+  //     var newQuestion = [...clozeQuestions];
+  //     newQuestion[i].questionText = text;
+  //     setClozeQuestions(newQuestion);
+  //   }
 
   function changeQuestion(text, i) {
-    var newQuestion = [...clozeQuestions];
-    newQuestion[i].questionText = text;
-    setclozeQuestions(newQuestion);
+    const regex = /<u>(.*?)<\/u>/g;
+    const matches = text.match(regex);
+    if (matches) {
+      const words = matches.map((match) => match.replace(/<\/?u>/g, ""));
+      const updatedQuestions = clozeQuestions.map((question, index) => {
+        if (index === i) {
+          return {
+            ...question,
+            questionText: text,
+            underlinedWords: words,
+            previewContent: text,
+          };
+        }
+        return question;
+      });
+      setClozeQuestions(updatedQuestions);
+      setPreviewContent(text);
+    } else {
+      setClozeQuestions((prevQuestions) => {
+        const updatedQuestions = [...prevQuestions];
+        updatedQuestions[i].questionText = text;
+        updatedQuestions[i].underlinedWords = [];
+        updatedQuestions[i].previewContent = text;
+        return updatedQuestions;
+      });
+      setPreviewContent(text);
+    }
   }
 
   function addQuestionType(i, type) {
     let qs = [...clozeQuestions];
     qs[i].questionType = type;
-    setclozeQuestions(qs);
+    setClozeQuestions(qs);
   }
 
   function copyQuestion(i) {
     // expandCloseAll();
     let qs = [...clozeQuestions];
     var newQuestion = qs[i];
-    setclozeQuestions([...clozeQuestions, newQuestion]);
+    setClozeQuestions([...clozeQuestions, newQuestion]);
   }
 
   function deleteQuestion(i) {
@@ -65,18 +109,18 @@ const ClozeQuestion = () => {
     if (clozeQuestions.length > 1) {
       qs.splice(i, 1);
     }
-    setclozeQuestions(qs);
+    setClozeQuestions(qs);
   }
 
   function requiredQuestion(i) {
     var reqQuestion = [...clozeQuestions];
     reqQuestion[i].required = !reqQuestion[i].required;
     alert(reqQuestion[i].required + " " + i);
-    setclozeQuestions(reqQuestion);
+    setClozeQuestions(reqQuestion);
   }
 
   function addMoreQuestionField() {
-    setclozeQuestions([
+    setClozeQuestions([
       ...clozeQuestions,
       {
         questionText: "Question",
@@ -84,6 +128,8 @@ const ClozeQuestion = () => {
         options: [{ optionText: "Option 1" }],
         open: true,
         required: false,
+        underlinedWords: [],
+        previewContent: "",
       },
     ]);
   }
@@ -92,7 +138,7 @@ const ClozeQuestion = () => {
     // expandCloseAll();
     let qs = [...clozeQuestions];
     var newQuestion = qs[i];
-    setclozeQuestions([...clozeQuestions, newQuestion]);
+    setClozeQuestions([...clozeQuestions, newQuestion]);
   }
 
   function deleteQuestion(i) {
@@ -100,27 +146,14 @@ const ClozeQuestion = () => {
     if (clozeQuestions.length > 1) {
       qs.splice(i, 1);
     }
-    setclozeQuestions(qs);
+    setClozeQuestions(qs);
   }
 
   function requiredQuestion(i) {
     var reqQuestion = [...clozeQuestions];
     reqQuestion[i].required = !reqQuestion[i].required;
     alert(reqQuestion[i].required + " " + i);
-    setclozeQuestions(reqQuestion);
-  }
-
-  function addMoreQuestionField() {
-    setclozeQuestions([
-      ...clozeQuestions,
-      {
-        questionText: "Question",
-        questionType: "radio",
-        options: [{ optionText: "Option 1" }],
-        open: true,
-        required: false,
-      },
-    ]);
+    setClozeQuestions(reqQuestion);
   }
 
   function questionsUI() {
@@ -181,7 +214,18 @@ const ClozeQuestion = () => {
               <h4 style={{ marginTop: "10px", marginBottom: "10px" }}>
                 Preview
               </h4>
-              <div dangerouslySetInnerHTML={{ __html: previewContent }} />
+              <div dangerouslySetInnerHTML={{ __html: ques.previewContent }} />
+            </div>
+
+            <div className="underlined_words_list">
+              <h4>Underlined Words:</h4>
+              <ul>
+                {ques.underlinedWords.map((word, index) => (
+                  <div className="add_question_body" key={index}>
+                    <li key={index}>{word}</li>
+                  </div>
+                ))}
+              </ul>
             </div>
 
             <div className="add_footer">
