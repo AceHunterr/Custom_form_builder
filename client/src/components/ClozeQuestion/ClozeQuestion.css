@@ -1,0 +1,14 @@
+.add_question_body ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.add_question_body li input[type="checkbox"] {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+}

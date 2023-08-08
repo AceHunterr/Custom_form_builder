@@ -1,32 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
-import CheckBoxicon from "@material-ui/icons/CheckBox";
-import SubjectIcon from "@material-ui/icons/Subject";
-import { BsTrash } from "react-icons/bs";
-import { IconButton } from "@material-ui/core";
-import FilterNoneIcon from "@material-ui/icons/FilterNone";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import TextFieldsIcon from "@material-ui/icons/TextFields";
-import { BsFileText } from "react-icons/bs";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Button from "@material-ui/core/Button";
-import { FCRightUp } from "react-icons/fc";
-import CloseIcon from "@material-ui/icons/Close";
-import Radio from "@material-ui/core/Radio";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Typography from "@mui/material/Typography";
-import { MenuItem } from "@material-ui/core";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import NorthEastIcon from "@mui/icons-material/NorthEast";
-
-import CropOriginalIcon from "@material-ui/icons/CropOriginal";
-import ShortTextIcon from "@material-ui/icons/ShortText";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const ClozedQuestionRenderer = () => {
   const [formData, setFormData] = useState([]);
@@ -93,21 +71,43 @@ const ClozedQuestionRenderer = () => {
                 {i + 1}. {strippedPreviewContent}
               </Typography>
               <div className="add_question_top">
-                <CropOriginalIcon
+                {/* <CropOriginalIcon
                   style={{ color: "#5f6368", marginBottom: "20px" }}
-                />
+                /> */}
               </div>
 
-              <div className="underlined_words_list">
-                <h4>Underlined Words:</h4>
-                <ul>
-                  {ques.underlinedWords.map((word, index) => (
-                    <div className="add_question_body" key={index}>
-                      <li key={index}>{word}</li>
-                    </div>
-                  ))}
-                </ul>
-              </div>
+              <DragDropContext>
+                <div className="underlined_words_list">
+                  <h4>Underlined Words:</h4>
+                  <ul>
+                    <Droppable droppableId="underlined_words">
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                          class="underlined_words_list"
+                        >
+                          {ques.underlinedWords.map((word, index) => (
+                            <Draggable draggableId={i}>
+                              {(provided) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  className="add_question_body"
+                                  key={index}
+                                >
+                                  <h1 key={index}>{word}</h1>
+                                </div>
+                              )}
+                            </Draggable>
+                          ))}
+                        </div>
+                      )}
+                    </Droppable>
+                  </ul>
+                </div>
+              </DragDropContext>
             </AccordionDetails>
           </div>
         </Accordion>
