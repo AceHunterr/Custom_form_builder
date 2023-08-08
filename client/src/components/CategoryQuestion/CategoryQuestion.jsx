@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CategoryQuestion.css"; // Don't forget to create the CSS file
-
+import RichTextEditor from "../RichTextEditor";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -182,89 +182,144 @@ const CategoryQuestion = () => {
               elevation={1}
               style={{ width: "100%" }}
             >
-              <div className="saved_questions">
+              {!categoryQuestion[i].open ? (
+                <div className="saved_questions">
+                  <Typography
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "400",
+                      letterSpacing: ".1px",
+                      lineHeight: "24px",
+                      paddingBottom: "8px",
+                      fontFamily: "Inter, sans-serif",
+                    }}
+                  >
+                    Categories and Objects
+                  </Typography>
+                </div>
+              ) : (
+                ""
+              )}
+            </AccordionSummary>
+            <div className="question_boxes">
+              <AccordionDetails className="add_question">
                 <Typography
                   style={{
                     fontSize: "15px",
-                    fontWeight: "400",
+                    fontWeight: "700",
                     letterSpacing: ".1px",
                     lineHeight: "24px",
                     paddingBottom: "8px",
                     fontFamily: "Inter, sans-serif",
                   }}
                 >
-                  {ques.questionText}
+                  Category Questions
                 </Typography>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails className="add_question">
-              <Typography
-                style={{
-                  fontSize: "15px",
-                  fontWeight: "700",
-                  letterSpacing: ".1px",
-                  lineHeight: "24px",
-                  paddingBottom: "8px",
-                  fontFamily: "Inter, sans-serif",
-                }}
-              >
-                Categories and Objects
-              </Typography>
-              <input
-                id="question-text"
-                type="text"
-                className="text_input"
-                placeholder="Question text"
-                value={ques.questionText}
-                onChange={(e) => {
-                  changeQuestionText(e.target.value, i);
-                }}
-              />
-              {ques.categories.map((category, j) => (
-                <div key={j}>
-                  <input
-                    id={`category-text-${j}`}
-                    type="text"
-                    className="text_input"
-                    placeholder="Category"
-                    value={category.category}
-                    onChange={(e) => {
-                      changeCategoryText(e.target.value, i, j);
-                    }}
-                  />
-                  {category.objects.map((object, k) => (
-                    <div className="add_question_body" key={k}>
-                      <input
-                        id={`object-text-${k}-${k}`}
-                        type="text"
-                        className="text_input"
-                        placeholder="Object"
-                        value={object.objectText}
-                        onChange={(e) => {
-                          changeObjectValue(e.target.value, i, j, k);
-                        }}
-                      />
-                      <IconButton aria-label="delete">
-                        <BsTrash
-                          onClick={() => {
-                            removeObject(i, j, k);
+                <RichTextEditor
+                  value={ques.questionText}
+                  onChange={(value) => {
+                    changeQuestionText(value, i);
+                  }}
+                />
+
+                <Typography
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "700",
+                    letterSpacing: ".1px",
+                    lineHeight: "24px",
+                    paddingBottom: "0",
+                    paddingTop: "50px",
+                    paddingLeft: "10px",
+                    fontFamily: "Inter, sans-serif",
+                  }}
+                >
+                  Categories with Objects:
+                </Typography>
+
+                {ques.categories.map((category, j) => (
+                  <div key={j}>
+                    <span>{j + 1}. </span>
+                    <input
+                      id="options-text"
+                      type="text"
+                      className="text_input category_categories"
+                      placeholder="Category"
+                      value={category.category}
+                      onChange={(e) => {
+                        changeCategoryText(e.target.value, i, j);
+                      }}
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        marginTop: "10px",
+                        textTransform: "uppercase",
+                      }}
+                    />
+                    {category.objects.map((object, k) => (
+                      <div
+                        className="add_question_body"
+                        key={k}
+                        style={{ paddingLeft: "20px" }}
+                      >
+                        {" "}
+                        <span>{k + 1}. </span>
+                        <input
+                          style={{ marginLeft: "5px" }}
+                          id="options-text"
+                          type="text"
+                          className="text_input"
+                          placeholder="Object"
+                          value={object.objectText}
+                          onChange={(e) => {
+                            changeObjectValue(e.target.value, i, j, k);
                           }}
                         />
-                      </IconButton>
+                        <IconButton aria-label="delete">
+                          <BsTrash
+                            onClick={() => {
+                              removeObject(i, j, k);
+                            }}
+                          />
+                        </IconButton>
+                      </div>
+                    ))}
+                    {/* <Button
+                      size="small"
+                      onClick={() => {
+                        addObject(i, j);
+                      }}
+                    >
+                      Add Object
+                    </Button> */}
+                    <div style={{ paddingLeft: "25px" }}>
+                      <input
+                        id="options-text"
+                        type="text"
+                        className="text_input"
+                        style={{ fontSize: "13px", width: "60px" }}
+                        placeholder="Add other"
+                      ></input>
+                      <Button
+                        size="small"
+                        onClick={() => {
+                          addObject(i, j);
+                        }}
+                        style={{
+                          textTransform: "none",
+                          color: "#4285f4",
+                          fontsize: "13px",
+                          fontweight: "600",
+                        }}
+                      >
+                        Add Option
+                      </Button>
                     </div>
-                  ))}
-                  <Button
-                    size="small"
-                    onClick={() => {
-                      addObject(i, j);
-                    }}
-                  >
-                    Add Object
-                  </Button>
-                </div>
-              ))}
-              {/* Other sections of your accordion */}
-            </AccordionDetails>
+                  </div>
+                ))}
+                {/* Other sections of your accordion */}
+              </AccordionDetails>
+            </div>
           </Accordion>
         </div>
       </div>

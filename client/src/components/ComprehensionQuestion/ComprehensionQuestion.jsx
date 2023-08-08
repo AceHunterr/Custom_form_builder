@@ -273,7 +273,7 @@ const ComprehensionQuestion = () => {
                         ></input>
                       </div>
                       <IconButton aria-label="delete">
-                        <CloseIcon
+                        <BsTrash
                           onClick={() => {
                             if (
                               question.options &&
