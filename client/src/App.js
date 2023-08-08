@@ -26,7 +26,7 @@ const RendererPage = () => {
       <FormHeader />
       <div className="question-type-section">
         <h2 className="section-heading">Category Questions</h2>
-        <ClozedQuestionRenderer />
+        <CategoryQuestionRenderer />
       </div>
       <div className="question-type-section">
         <h2 className="section-heading">Clozed Questions</h2>

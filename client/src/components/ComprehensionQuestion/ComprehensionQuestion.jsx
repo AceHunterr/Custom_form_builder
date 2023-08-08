@@ -135,13 +135,6 @@ const ComprehensionQuestion = () => {
     setComprehensionQuestions(qs);
   }
 
-  function requiredQuestion(i) {
-    var reqQuestion = [...comprehensionQuestions];
-    reqQuestion[i].required = !reqQuestion[i].required;
-    alert(reqQuestion[i].required + " " + i);
-    setComprehensionQuestions(reqQuestion);
-  }
-
   function addMoreMcq(i) {
     const newComprehensionQuestions = [...comprehensionQuestions];
     newComprehensionQuestions[i].questions_list.push({
