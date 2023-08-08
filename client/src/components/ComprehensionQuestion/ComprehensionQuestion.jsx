@@ -88,7 +88,12 @@ const ComprehensionQuestion = () => {
   }
 
   function removeOption(i, j, k) {
+    console.log("Calling removeOption with i:", i, "j:", j, "k:", k);
+
     var RemoveOptionQuestion = [...comprehensionQuestions];
+    console.log("Hello");
+    console.log(RemoveOptionQuestion[i].questions_list[j]);
+    console.log("Bye");
     if (RemoveOptionQuestion[i].questions_list[j].options.length > 1) {
       RemoveOptionQuestion[i].questions_list[j].options.splice(k, 1);
       setComprehensionQuestions(RemoveOptionQuestion);
@@ -98,11 +103,13 @@ const ComprehensionQuestion = () => {
   function addOption(i, j) {
     var optionsOfQuestion = [...comprehensionQuestions];
     if (optionsOfQuestion[i].questions_list[j].options.length < 5) {
+      console.log(optionsOfQuestion[i].questions_list[j].options);
       optionsOfQuestion[i].questions_list[j].options.push({
         optionText:
           "Option" +
           (optionsOfQuestion[i].questions_list[j].options.length + 1),
       });
+      console.log(optionsOfQuestion[i].questions_list[j].options.length);
     } else {
       alert("Cannot add more than 5 options");
     }
@@ -208,6 +215,8 @@ const ComprehensionQuestion = () => {
                 changeQuestion(value, i);
               }}
             />
+            {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
+
             <Typography
               style={{
                 fontSize: "15px",
@@ -215,7 +224,8 @@ const ComprehensionQuestion = () => {
                 letterSpacing: ".1px",
                 lineHeight: "24px",
                 paddingBottom: "0",
-                paddingTop: "10px",
+                paddingTop: "50px",
+                paddingLeft: "10px",
                 fontFamily: "Inter, sans-serif",
               }}
             >
@@ -236,15 +246,6 @@ const ComprehensionQuestion = () => {
                     />
                   </div>
                   {question.options.map((op, k) => (
-                    // <input
-                    //   type="text"
-                    //   className="text_input"
-                    //   placeholder="option"
-                    //   value={question.options[k].optionText}
-                    //   onChange={(e) => {
-                    //     changeOptionValue(e.target.value, i, j);
-                    //   }}
-                    // ></input>;
                     <div className="add_question_body" key={k}>
                       {question.questionType != "text" ? (
                         <input
@@ -273,13 +274,65 @@ const ComprehensionQuestion = () => {
                               question.options &&
                               question.options.length > k
                             ) {
-                              removeOption(j, k);
+                              removeOption(i, j, k);
                             }
                           }}
                         />
                       </IconButton>
                     </div>
                   ))}
+
+                  {question.options.length < 5 ? (
+                    <div className="add_question_body">
+                      <FormControlLabel
+                        disabled
+                        control={
+                          ques.questionType != "text" ? (
+                            <input
+                              type="radio"
+                              color="primary"
+                              inputProps={{
+                                "aria-label": "secondary checkbox",
+                              }}
+                              style={{
+                                marginLeft: "10px",
+                                marginRight: "10px",
+                              }}
+                              disabled
+                            />
+                          ) : (
+                            <ShortTextIcon style={{ marginRight: "10px" }} />
+                          )
+                        }
+                        label={
+                          <div>
+                            <input
+                              type="text"
+                              className="text_input"
+                              style={{ fontSize: "13px", width: "60px" }}
+                              placeholder="Add other"
+                            ></input>
+                            <Button
+                              size="small"
+                              onClick={() => {
+                                addOption(i, j);
+                              }}
+                              style={{
+                                textTransform: "none",
+                                color: "#4285f4",
+                                fontsize: "13px",
+                                fontweight: "600",
+                              }}
+                            >
+                              Add Option
+                            </Button>
+                          </div>
+                        }
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </AccordionDetails>
               </div>
             ))}
@@ -368,7 +421,7 @@ const ComprehensionQuestion = () => {
         <div className="question_form">
           <br></br>
           <div className="section">
-            <div className="question_title_section">
+            {/* <div className="question_title_section">
               <div className="question_form_top">
                 <input
                   type="text"
@@ -382,7 +435,7 @@ const ComprehensionQuestion = () => {
                   placeholder="Form Description"
                 ></input>
               </div>
-            </div>
+            </div> */}
 
             {questionsUI()}
             {/* <ClozedQuestionRenderer formData={comprehensionQuestions} /> */}

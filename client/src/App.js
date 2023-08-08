@@ -31,6 +31,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<ClozeQuestionPage />} />
+          <Route exact path="/qs" element={<QuestionForm />} />
           <Route
             exact
             path="/renderer"
