@@ -52,18 +52,18 @@ const ComprehensionQuestion = () => {
     },
   ]);
 
-  //   const savecomprehensionQuestions = () => {
-  //     axios
-  //       .post("http://localhost:5000/api/cloze-questions", {
-  //         formData: comprehensionQuestions,
-  //       })
-  //       .then((response) => {
-  //         console.log("Data saved successfully!");
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error saving data:", error);
-  //       });
-  //   };
+  const savecomprehensionQuestions = () => {
+    axios
+      .post("http://localhost:5000/api/comprehension-questions", {
+        formData: comprehensionQuestions,
+      })
+      .then((response) => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  };
 
   function changeComprehensionQuestion(text, i) {
     var newQuestion = [...comprehensionQuestions];
@@ -398,15 +398,14 @@ const ComprehensionQuestion = () => {
                 </IconButton>
               </div>
             </div>
-            {/* <Button
+            <Button
               variant="contained"
               color="primary"
-              onClick={saveComprehensionQuestions}
+              onClick={savecomprehensionQuestions}
               style={{ width: "50%" }}
             >
               Save Form Data
-            </Button> */}
-            {/* <button onClick={savecomprehensionQuestions}>Save Form Data</button> */}
+            </Button>
           </AccordionDetails>
           <div className="question_edit">
             <AddCircleOutlineIcon
