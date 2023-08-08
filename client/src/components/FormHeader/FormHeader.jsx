@@ -13,6 +13,7 @@ import MorevertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const PrimaryButton = styled(Button)`
   && {
@@ -33,6 +34,11 @@ const InvertedButton = styled(Button)`
 
 const FormHeader = () => {
   const [formTitle, setFormTitle] = useState("Untitled");
+  const navigate = useNavigate();
+
+  const navigateToPreview = () => {
+    navigate("/renderer");
+  };
 
   const handleFormNameChange = (event) => {
     setFormTitle(event.target.value);
@@ -71,11 +77,14 @@ const FormHeader = () => {
           /> */}
         </div>
         <div className="form_header_right">
-          <IconButton>
+          {/* <IconButton>
             <AddIcon size="small" className="form_header_icon" />
-          </IconButton>
+          </IconButton> */}
           <IconButton>
-            <AiOutlineEye className="form_header_icon" />
+            <AiOutlineEye
+              className="form_header_icon"
+              onClick={navigateToPreview}
+            />
           </IconButton>
           <IconButton>
             <FiSettings className="form_header_icon" />
@@ -97,10 +106,18 @@ const FormHeader = () => {
           >
             Save and Proceed
           </Button> */}
-          <PrimaryButton variant="contained" href="#contained-buttons">
+          <PrimaryButton
+            variant="contained"
+            href="#contained-buttons"
+            onClick={navigateToPreview}
+          >
             Send
           </PrimaryButton>
-          <InvertedButton variant="contained" href="#contained-buttons">
+          <InvertedButton
+            variant="contained"
+            href="#contained-buttons"
+            onClick={navigateToPreview}
+          >
             Save and Proceed
           </InvertedButton>
 

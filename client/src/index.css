@@ -17,14 +17,14 @@
 
 .question_form_top {
   background-color: white;
-  border-left: 8px solid rgb(103, 58, 183);
+  border-left: 8px solid rgb(63, 81, 181);
   border-radius: 8px;
   padding: 30px 25px;
   text-transform: capitalize;
 }
 .question_form_top_name {
   box-sizing: border-box;
-  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  /* font-family: "Google Sans", Roboto, Arial, sans-serif; */
   font-size: 32px;
   font-weight: 400;
   line-height: 40px;
@@ -40,7 +40,7 @@
 .question_form_top_desc {
   box-sizing: border-box;
   margin-top: 10px;
-  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  /* font-family: "Google Sans", Roboto, Arial, sans-serif; */
   font-size: 13px;
   font-weight: 400;
   line-height: 40px;
@@ -98,7 +98,7 @@
 }
 
 .question:focus {
-  border-bottom: 1px solid rgb(103, 58, 183);
+  border-bottom: 1px solid rgb(63, 81, 181);
   background-color: white;
 }
 
@@ -135,7 +135,7 @@
 }
 
 .text-input:focus {
-  border-radius: 1.5px solid rgb(103, 58, 183);
+  border-radius: 1.5px solid rgb(63, 81, 181);
 }
 
 .add_footer {
@@ -175,4 +175,25 @@
 .edit {
   color: #5f6368;
   padding: 5px 8px 5px 5px;
+}
+
+#options-text {
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: 0.5s;
+}
+
+#options-text:focus {
+  border-bottom: 2px solid rgb(63, 81, 181);
+  outline: none;
+}
+
+/* RichTextEditor.css */
+.editor-container {
+  transition: 0.7s;
+}
+
+.editor-container.focused {
+  box-shadow: 2px 2px 5px rgb(63, 81, 181);
+  transform: translateY(-2px);
 }

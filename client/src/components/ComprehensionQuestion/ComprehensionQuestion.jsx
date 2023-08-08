@@ -65,9 +65,14 @@ const ComprehensionQuestion = () => {
   //       });
   //   };
 
-  function changeQuestion(text, i) {
+  function changeComprehensionQuestion(text, i) {
     var newQuestion = [...comprehensionQuestions];
     newQuestion[i].comprehensionText = text;
+    setComprehensionQuestions(newQuestion);
+  }
+  function changeQuestionText(text, i, j) {
+    var newQuestion = [...comprehensionQuestions];
+    newQuestion[i].questions_list[j].questionText = text;
     setComprehensionQuestions(newQuestion);
   }
 
@@ -212,7 +217,7 @@ const ComprehensionQuestion = () => {
             <RichTextEditor
               value={ques.comprehensionText}
               onChange={(value) => {
-                changeQuestion(value, i);
+                changeComprehensionQuestion(value, i);
               }}
             />
             {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
@@ -236,12 +241,13 @@ const ComprehensionQuestion = () => {
                 <AccordionDetails className="add_question">
                   <div className="add_question_top">
                     <input
+                      id="options-text"
                       type="text"
                       className="question"
                       placeholder="Question"
                       value={question.questionText}
                       onChange={(e) => {
-                        changeQuestion(e.target.value, i);
+                        changeQuestionText(e.target.value, i, j);
                       }}
                     />
                   </div>
@@ -257,6 +263,7 @@ const ComprehensionQuestion = () => {
                       )}
                       <div>
                         <input
+                          id="options-text"
                           type="text"
                           className="text_input"
                           placeholder="option"
@@ -266,7 +273,7 @@ const ComprehensionQuestion = () => {
                           }}
                         ></input>
                       </div>
-                      <CropOriginalIcon style={{ color: "#5f6368" }} />
+                      {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
                       <IconButton aria-label="delete">
                         <CloseIcon
                           onClick={() => {
@@ -307,6 +314,7 @@ const ComprehensionQuestion = () => {
                         label={
                           <div>
                             <input
+                              id="options-text"
                               type="text"
                               className="text_input"
                               style={{ fontSize: "13px", width: "60px" }}
