@@ -4,6 +4,19 @@
   font-family: "Inter", sans-serif;
 }
 
+.section-heading {
+  /* text-shadow: 7px 4px 5px rgb(63, 81, 181); */
+  font-size: 20px; /* Adjust the font size as needed */
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.question-type-section {
+  margin-top: 15px;
+  margin-bottom: 100px;
+  border: 1px black;
+}
+
 .question_form {
   background-color: aliceblue;
   height: 100%;

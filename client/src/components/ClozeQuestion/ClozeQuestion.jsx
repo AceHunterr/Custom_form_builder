@@ -296,7 +296,6 @@ const ClozeQuestion = () => {
             >
               Save Form Data
             </Button>
-            {/* <button onClick={saveClozeQuestions}>Save Form Data</button> */}
           </AccordionDetails>
           <div className="question_edit">
             <AddCircleOutlineIcon

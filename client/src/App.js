@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import DraggableComponent from "./components/DraggableComponent/DraggableComponent";
 import ClozeQuestion from "./components/ClozeQuestion/ClozeQuestion";
 import ComprehensionQuestion from "./components/ComprehensionQuestion/ComprehensionQuestion";
+import ComprehensionQuestionRenderer from "./components/ComprehensionQuestion/ComprehensionQuestionRenderer";
 import "./index.css";
 
 const ClozeQuestionPage = () => {
@@ -19,10 +20,17 @@ const ClozeQuestionPage = () => {
 };
 const ClozeQuestionRendererPage = () => {
   return (
-    <>
+    <div style={{ width: "70%", margin: "auto" }}>
       <FormHeader />
-      <ClozedQuestionRenderer />
-    </>
+      <div className="question-type-section">
+        <h2 className="section-heading">Clozed Questions</h2>
+        <ClozedQuestionRenderer />
+      </div>
+      <div className="question-type-section">
+        <h2 className="section-heading">Comprehension Questions</h2>
+        <ComprehensionQuestionRenderer />
+      </div>
+    </div>
   );
 };
 function App() {
