@@ -118,21 +118,6 @@ const ClozeQuestion = () => {
     ]);
   }
 
-  // function copyQuestion(i) {
-  //   // expandCloseAll();
-  //   let qs = [...clozeQuestions];
-  //   var newQuestion = qs[i];
-  //   setClozeQuestions([...clozeQuestions, newQuestion]);
-  // }
-
-  // function deleteQuestion(i) {
-  //   let qs = [...clozeQuestions];
-  //   if (clozeQuestions.length > 1) {
-  //     qs.splice(i, 1);
-  //   }
-  //   setClozeQuestions(qs);
-  // }
-
   function requiredQuestion(i) {
     var reqQuestion = [...clozeQuestions];
     reqQuestion[i].required = !reqQuestion[i].required;
@@ -191,11 +176,7 @@ const ClozeQuestion = () => {
                 setPreviewContent(value);
               }}
             />
-            <div className="add_question_top">
-              <CropOriginalIcon
-                style={{ color: "#5f6368", marginBottom: "20px" }}
-              />
-            </div>
+            <div className="add_question_top"></div>
             <div className="preview_field">
               <Typography
                 style={{
@@ -335,7 +316,6 @@ const ClozeQuestion = () => {
             </div>
 
             {questionsUI()}
-            {/* <ClozedQuestionRenderer formData={clozeQuestions} /> */}
           </div>
         </div>
       </div>

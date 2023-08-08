@@ -36,25 +36,7 @@ const ClozedQuestionRenderer = () => {
             id="panella-header"
             elevation={1}
             style={{ width: "100%" }}
-          >
-            {/* {!ques.open ? (
-              <div className="saved_questions">
-                <Typography
-                  style={{
-                    fontSize: "15px",
-                    fontWeight: "400",
-                    letterSpacing: ".1px",
-                    lineHeight: "24px",
-                    paddingBottom: "8px",
-                  }}
-                >
-                  {i + 1}. {ques.questionText}
-                </Typography>
-              </div>
-            ) : (
-              ""
-            )} */}
-          </AccordionSummary>
+          ></AccordionSummary>
 
           <div className="question_boxes">
             <AccordionDetails className="add_question">
@@ -70,11 +52,7 @@ const ClozedQuestionRenderer = () => {
               >
                 {i + 1}. {strippedPreviewContent}
               </Typography>
-              <div className="add_question_top">
-                {/* <CropOriginalIcon
-                  style={{ color: "#5f6368", marginBottom: "20px" }}
-                /> */}
-              </div>
+              <div className="add_question_top"></div>
 
               <DragDropContext>
                 <div className="underlined_words_list">

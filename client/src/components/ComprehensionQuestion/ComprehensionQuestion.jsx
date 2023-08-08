@@ -25,7 +25,6 @@ import Typography from "@mui/material/Typography";
 import { MenuItem } from "@material-ui/core";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import NorthEastIcon from "@mui/icons-material/NorthEast";
-
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import ShortTextIcon from "@material-ui/icons/ShortText";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -228,7 +227,6 @@ const ComprehensionQuestion = () => {
                 changeComprehensionQuestion(value, i);
               }}
             />
-            {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
 
             <Typography
               style={{
@@ -281,7 +279,6 @@ const ComprehensionQuestion = () => {
                           }}
                         ></input>
                       </div>
-                      {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
                       <IconButton aria-label="delete">
                         <CloseIcon
                           onClick={() => {
@@ -450,26 +447,7 @@ const ComprehensionQuestion = () => {
       <div>
         <div className="question_form">
           <br></br>
-          <div className="section">
-            {/* <div className="question_title_section">
-              <div className="question_form_top">
-                <input
-                  type="text"
-                  className="question_form_top_name"
-                  style={{ color: "black" }}
-                  placeholder="Untitled document"
-                ></input>
-                <input
-                  type="text"
-                  className="question_form_top_desc"
-                  placeholder="Form Description"
-                ></input>
-              </div>
-            </div> */}
-
-            {questionsUI()}
-            {/* <ClozedQuestionRenderer formData={comprehensionQuestions} /> */}
-          </div>
+          <div className="section">{questionsUI()}</div>
         </div>
       </div>
     </>

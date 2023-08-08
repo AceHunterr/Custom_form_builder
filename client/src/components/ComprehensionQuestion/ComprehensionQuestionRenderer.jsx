@@ -4,7 +4,6 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const ComprehensionQuestionRenderer = () => {
   const [formData, setFormData] = useState([]);
@@ -25,8 +24,7 @@ const ComprehensionQuestionRenderer = () => {
       /<\/?[^>]+(>|$)/g,
       ""
     );
-    // console.log(strippedPreviewContent);
-    // console.log(ques.open);
+
     return (
       <Accordion expanded={ques.open} className={ques.open ? "add border" : ""}>
         <AccordionSummary
@@ -34,25 +32,7 @@ const ComprehensionQuestionRenderer = () => {
           id="panella-header"
           elevation={1}
           style={{ width: "100%" }}
-        >
-          {/* {!ques.open ? (
-              <div className="saved_questions">
-                <Typography
-                  style={{
-                    fontSize: "15px",
-                    fontWeight: "400",
-                    letterSpacing: ".1px",
-                    lineHeight: "24px",
-                    paddingBottom: "8px",
-                  }}
-                >
-                  {i + 1}. {ques.questionText}
-                </Typography>
-              </div>
-            ) : (
-              ""
-            )} */}
-        </AccordionSummary>
+        ></AccordionSummary>
 
         <div className="question_boxes">
           <AccordionDetails className="add_question">
@@ -79,18 +59,13 @@ const ComprehensionQuestionRenderer = () => {
                       <div>
                         <h5>{op.optionText}</h5>
                       </div>
-                      {/* <CropOriginalIcon style={{ color: "#5f6368" }} /> */}
                     </div>
                   ))}
                 </AccordionDetails>
               </div>
             ))}
 
-            <div className="add_question_top">
-              {/* <CropOriginalIcon
-                  style={{ color: "#5f6368", marginBottom: "20px" }}
-                /> */}
-            </div>
+            <div className="add_question_top"></div>
           </AccordionDetails>
         </div>
       </Accordion>

@@ -2,12 +2,10 @@ import "./FormHeader.css";
 import { React, useState } from "react";
 import { FiStar, FiSettings } from "react-icons/fi";
 import { AiOutlineEye } from "react-icons/ai";
-// import { Home } from "react-icons/io";
 import HomeIcon from "@mui/icons-material/Home";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddIcon from "@mui/icons-material/Add";
 import { IconButton } from "@material-ui/core";
-// import avatarimage from "./2.jpg";
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import MorevertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
@@ -67,19 +65,8 @@ const FormHeader = () => {
             value={formTitle}
             onChange={handleFormNameChange}
           ></input>
-          {/* <IoMdFolderOpen
-            className="form_header_icon"
-            style={{ marginRight: "10px" }}
-          ></IoMdFolderOpen>
-          <FiStar
-            className="form_header_icon"
-            style={{ marginRight: "10px" }}
-          /> */}
         </div>
         <div className="form_header_right">
-          {/* <IconButton>
-            <AddIcon size="small" className="form_header_icon" />
-          </IconButton> */}
           <IconButton>
             <AiOutlineEye
               className="form_header_icon"
@@ -90,22 +77,6 @@ const FormHeader = () => {
             <FiSettings className="form_header_icon" />
           </IconButton>
 
-          {/* <Button
-            className="send-button"
-            // variant="contained"
-            // color="primary"
-            href="#contained-buttons"
-          >
-            Send
-          </Button>
-          <Button
-            className="save-and-proceed-button"
-            // variant="contained"
-            // color="primary"
-            href="#contained-buttons"
-          >
-            Save and Proceed
-          </Button> */}
           <PrimaryButton
             variant="contained"
             href="#contained-buttons"
@@ -125,10 +96,7 @@ const FormHeader = () => {
             <MorevertIcon className="form_header_icon" />
           </IconButton>
           <IconButton>
-            <Avatar
-              style={{ height: "30px", width: "30px" }}
-              //   src={avatarimage}
-            />
+            <Avatar style={{ height: "30px", width: "30px" }} />
           </IconButton>
         </div>
       </div>
