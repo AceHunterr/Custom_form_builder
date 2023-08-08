@@ -14,8 +14,8 @@ const BuilderPage = () => {
   return (
     <>
       <FormHeader />
-      <CategoryQuestion />
       <ClozeQuestion />
+      <CategoryQuestion />
       <ComprehensionQuestion />
     </>
   );
@@ -25,12 +25,12 @@ const RendererPage = () => {
     <div style={{ width: "70%", margin: "auto" }}>
       <FormHeader />
       <div className="question-type-section">
-        <h2 className="section-heading">Category Questions</h2>
-        <CategoryQuestionRenderer />
-      </div>
-      <div className="question-type-section">
         <h2 className="section-heading">Clozed Questions</h2>
         <ClozedQuestionRenderer />
+      </div>
+      <div className="question-type-section">
+        <h2 className="section-heading">Category Questions</h2>
+        <CategoryQuestionRenderer />
       </div>
       <div className="question-type-section">
         <h2 className="section-heading">Comprehension Questions</h2>

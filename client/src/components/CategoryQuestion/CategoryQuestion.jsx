@@ -284,14 +284,7 @@ const CategoryQuestion = () => {
                         </IconButton>
                       </div>
                     ))}
-                    {/* <Button
-                      size="small"
-                      onClick={() => {
-                        addObject(i, j);
-                      }}
-                    >
-                      Add Object
-                    </Button> */}
+
                     <div style={{ paddingLeft: "25px" }}>
                       <input
                         id="options-text"
@@ -332,25 +325,7 @@ const CategoryQuestion = () => {
       <div>
         <div className="question_form">
           <br></br>
-          <div className="section">
-            <div className="question_title_section">
-              <div className="question_form_top">
-                <input
-                  type="text"
-                  className="question_form_top_name"
-                  style={{ color: "black" }}
-                  placeholder="Untitled document"
-                ></input>
-                <input
-                  type="text"
-                  className="question_form_top_desc"
-                  placeholder="Form Description"
-                ></input>
-              </div>
-            </div>
-
-            {questionUI()}
-          </div>
+          <div className="section">{questionUI()}</div>
         </div>
       </div>
     </>
