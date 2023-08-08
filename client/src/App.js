@@ -5,6 +5,7 @@ import ClozedQuestionRenderer from "./components/ClozeQuestion/ClozedQuestionRen
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import DraggableComponent from "./components/DraggableComponent/DraggableComponent";
 import ClozeQuestion from "./components/ClozeQuestion/ClozeQuestion";
+import ComprehensionQuestion from "./components/ComprehensionQuestion/ComprehensionQuestion";
 import "./index.css";
 
 const ClozeQuestionPage = () => {
@@ -12,6 +13,7 @@ const ClozeQuestionPage = () => {
     <>
       <FormHeader />
       <ClozeQuestion />
+      <ComprehensionQuestion />
     </>
   );
 };

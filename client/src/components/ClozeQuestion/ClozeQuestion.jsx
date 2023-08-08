@@ -16,6 +16,7 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import CropOriginalIcon from "@material-ui/icons/CropOriginal";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import OndemandVideoIcon from "@material-ui/icons/OndemandVideo";
+import "./ClozeQuestion.css";
 
 const ClozeQuestion = () => {
   const [clozeQuestions, setClozeQuestions] = useState([
@@ -30,7 +31,6 @@ const ClozeQuestion = () => {
   ]);
 
   const [previewContent, setPreviewContent] = useState("");
-  const [underlinedWords, setUnderlinedWords] = useState([]);
 
   const saveClozeQuestions = () => {
     axios
@@ -118,20 +118,20 @@ const ClozeQuestion = () => {
     ]);
   }
 
-  function copyQuestion(i) {
-    // expandCloseAll();
-    let qs = [...clozeQuestions];
-    var newQuestion = qs[i];
-    setClozeQuestions([...clozeQuestions, newQuestion]);
-  }
+  // function copyQuestion(i) {
+  //   // expandCloseAll();
+  //   let qs = [...clozeQuestions];
+  //   var newQuestion = qs[i];
+  //   setClozeQuestions([...clozeQuestions, newQuestion]);
+  // }
 
-  function deleteQuestion(i) {
-    let qs = [...clozeQuestions];
-    if (clozeQuestions.length > 1) {
-      qs.splice(i, 1);
-    }
-    setClozeQuestions(qs);
-  }
+  // function deleteQuestion(i) {
+  //   let qs = [...clozeQuestions];
+  //   if (clozeQuestions.length > 1) {
+  //     qs.splice(i, 1);
+  //   }
+  //   setClozeQuestions(qs);
+  // }
 
   function requiredQuestion(i) {
     var reqQuestion = [...clozeQuestions];
@@ -225,7 +225,7 @@ const ClozeQuestion = () => {
                 }}
               >
                 Underlined Words
-              </Typography>{" "}
+              </Typography>
               <ul>
                 {ques.underlinedWords.map((word, index) => (
                   <div className="add_question_body" key={index}>
