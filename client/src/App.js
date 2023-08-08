@@ -1,27 +1,33 @@
+import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FormHeader from "./components/FormHeader/FormHeader";
 import QuestionForm from "./components/QuestionForm/QuestionForm";
-import CategorizedForm from "./components/CategoryQuestion/CategoryQuestion";
-import ClozedQuestionRenderer from "./components/ClozeQuestion/ClozedQuestionRenderer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import DraggableComponent from "./components/DraggableComponent/DraggableComponent";
+import CategoryQuestion from "./components/CategoryQuestion/CategoryQuestion";
 import ClozeQuestion from "./components/ClozeQuestion/ClozeQuestion";
 import ComprehensionQuestion from "./components/ComprehensionQuestion/ComprehensionQuestion";
+import CategoryQuestionRenderer from "./components/CategoryQuestion/CategoryQuestionRenderer";
+import ClozedQuestionRenderer from "./components/ClozeQuestion/ClozedQuestionRenderer";
 import ComprehensionQuestionRenderer from "./components/ComprehensionQuestion/ComprehensionQuestionRenderer";
-import "./index.css";
+// import DraggableComponent from "./components/DraggableComponent/DraggableComponent";
 
-const ClozeQuestionPage = () => {
+const BuilderPage = () => {
   return (
     <>
       <FormHeader />
+      <CategoryQuestion />
       <ClozeQuestion />
       <ComprehensionQuestion />
     </>
   );
 };
-const ClozeQuestionRendererPage = () => {
+const RendererPage = () => {
   return (
     <div style={{ width: "70%", margin: "auto" }}>
       <FormHeader />
+      <div className="question-type-section">
+        <h2 className="section-heading">Category Questions</h2>
+        <ClozedQuestionRenderer />
+      </div>
       <div className="question-type-section">
         <h2 className="section-heading">Clozed Questions</h2>
         <ClozedQuestionRenderer />
@@ -38,13 +44,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element={<ClozeQuestionPage />} />
+          <Route exact path="/" element={<BuilderPage />} />
           <Route exact path="/qs" element={<QuestionForm />} />
-          <Route
-            exact
-            path="/renderer"
-            element={<ClozeQuestionRendererPage />}
-          />
+          <Route exact path="/renderer" element={<RendererPage />} />
         </Routes>
       </Router>
 
