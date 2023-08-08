@@ -37,13 +37,13 @@ const ComprehensionQuestion = () => {
       comprehensionText: "This is the comprehension text ",
       questions_list: [
         {
-          questionText: "Which is the capital city of karnataka?",
-          questionType: "radio",
+          questionText: "What is the name of the protagonist?",
+          questionType: "checkbox",
           options: [
-            { optionText: "Bengaluru" },
-            { optionText: "Belgavi" },
-            { optionText: "Hubli" },
-            { optionText: "Mandya" },
+            { optionText: "Ronald" },
+            { optionText: "David" },
+            { optionText: "Habibi" },
+            { optionText: "Mandyalayan" },
           ],
         },
       ],
@@ -143,7 +143,15 @@ const ComprehensionQuestion = () => {
     setComprehensionQuestions(reqQuestion);
   }
 
-  // Generalised Question Field
+  function addMoreMcq(i) {
+    const newComprehensionQuestions = [...comprehensionQuestions];
+    newComprehensionQuestions[i].questions_list.push({
+      questionText: "New Question",
+      questionType: "checkbox",
+      options: [{ optionText: "Option 1" }],
+    });
+    setComprehensionQuestions(newComprehensionQuestions);
+  }
   function addMoreQuestionField() {
     setComprehensionQuestions([
       ...comprehensionQuestions,
@@ -152,7 +160,7 @@ const ComprehensionQuestion = () => {
         questions_list: [
           {
             questionText: "Question 1",
-            questionType: "radio",
+            questionType: "checkbox",
             options: [{ optionText: "Option 1" }],
           },
         ],
@@ -296,7 +304,7 @@ const ComprehensionQuestion = () => {
                         control={
                           ques.questionType != "text" ? (
                             <input
-                              type="radio"
+                              type="checkbox"
                               color="primary"
                               inputProps={{
                                 "aria-label": "secondary checkbox",
@@ -341,6 +349,21 @@ const ComprehensionQuestion = () => {
                   ) : (
                     ""
                   )}
+                  <Button
+                    style={{
+                      marginTop: "16px",
+                      width: "35%",
+                      margin: "auto",
+                    }}
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={() => {
+                      addMoreMcq(i);
+                    }}
+                  >
+                    Add Question
+                  </Button>
                 </AccordionDetails>
               </div>
             ))}
