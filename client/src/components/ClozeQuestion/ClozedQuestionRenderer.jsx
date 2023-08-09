@@ -22,6 +22,29 @@ const ClozedQuestionRenderer = () => {
       });
   }, []);
 
+  const handleDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
+
+    const questionIndex = formData.findIndex(
+      (ques) => ques.questionType === "fill_blank"
+    );
+
+    if (questionIndex !== -1) {
+      const updatedWords = [...formData[questionIndex].underlinedWords];
+
+      const [movedWord] = updatedWords.splice(sourceIndex, 1);
+      updatedWords.splice(destinationIndex, 0, movedWord);
+
+      const updatedFormData = [...formData];
+      updatedFormData[questionIndex].underlinedWords = updatedWords;
+
+      setFormData(updatedFormData);
+    }
+  };
+
   function renderQuestion(ques, i) {
     const strippedPreviewContent = ques.previewContent.replace(
       /<\/?[^>]+(>|$)/g,
@@ -56,7 +79,7 @@ const ClozedQuestionRenderer = () => {
               </Typography>
               <div className="add_question_top"></div>
 
-              <DragDropContext>
+              <DragDropContext onDragEnd={handleDragEnd}>
                 <div className="underlined_words_list">
                   <h4>Underlined Words:</h4>
                   <ul>
@@ -68,7 +91,10 @@ const ClozedQuestionRenderer = () => {
                           class="underlined_words_list"
                         >
                           {ques.underlinedWords.map((word, index) => (
-                            <Draggable draggableId={i}>
+                            <Draggable
+                              draggableId={index.toString()}
+                              key={index}
+                            >
                               {(provided) => (
                                 <div
                                   ref={provided.innerRef}
@@ -77,7 +103,7 @@ const ClozedQuestionRenderer = () => {
                                   className="add_question_body"
                                   key={index}
                                 >
-                                  <h1 key={index}>{word}</h1>
+                                  <h3 key={index}>{word}</h3>
                                 </div>
                               )}
                             </Draggable>
