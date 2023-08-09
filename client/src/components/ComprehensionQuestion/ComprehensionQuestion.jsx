@@ -53,9 +53,12 @@ const ComprehensionQuestion = () => {
 
   const savecomprehensionQuestions = () => {
     axios
-      .post("http://localhost:5000/api/comprehension-questions", {
-        formData: comprehensionQuestions,
-      })
+      .post(
+        "https://custom-form-builder-server.onrender.com/api/comprehension-questions",
+        {
+          formData: comprehensionQuestions,
+        }
+      )
       .then((response) => {
         console.log("Data saved successfully!");
       })

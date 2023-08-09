@@ -45,9 +45,12 @@ const CategoryQuestion = () => {
 
   const saveCategoryQuestions = () => {
     axios
-      .post("http://localhost:5000/api/category-questions", {
-        formData: categoryQuestion,
-      })
+      .post(
+        "https://custom-form-builder-server.onrender.com/api/category-questions",
+        {
+          formData: categoryQuestion,
+        }
+      )
       .then((response) => {
         console.log("Data saved successfully!");
       })

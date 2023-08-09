@@ -34,9 +34,12 @@ const ClozeQuestion = () => {
 
   const saveClozeQuestions = () => {
     axios
-      .post("http://localhost:5000/api/cloze-questions", {
-        formData: clozeQuestions,
-      })
+      .post(
+        "https://custom-form-builder-server.onrender.com/api/cloze-questions",
+        {
+          formData: clozeQuestions,
+        }
+      )
       .then((response) => {
         console.log("Data saved successfully!");
       })

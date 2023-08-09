@@ -10,7 +10,9 @@ const ComprehensionQuestionRenderer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/comprehension-questions")
+      .get(
+        "https://custom-form-builder-server.onrender.com/api/comprehension-questions"
+      )
       .then((response) => {
         setFormData(response.data.data);
       })

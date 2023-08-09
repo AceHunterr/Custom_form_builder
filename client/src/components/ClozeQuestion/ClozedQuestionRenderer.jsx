@@ -11,7 +11,9 @@ const ClozedQuestionRenderer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/cloze-questions")
+      .get(
+        "https://custom-form-builder-server.onrender.com/api/cloze-questions"
+      )
       .then((response) => {
         setFormData(response.data.data);
       })

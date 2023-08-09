@@ -10,7 +10,9 @@ const CategoryQuestionRenderer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/category-questions")
+      .get(
+        "https://custom-form-builder-server.onrender.com/api/category-questions"
+      )
       .then((response) => {
         setFormData(response.data.data);
       })
