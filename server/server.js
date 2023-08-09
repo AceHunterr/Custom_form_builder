@@ -35,6 +35,27 @@ const clozeQuestionSchema = new mongoose.Schema({
 
 const ClozeQuestion = mongoose.model("ClozeQuestion", clozeQuestionSchema);
 
+const categoryQuestionSchema = new mongoose.Schema({
+  questionText: { type: String, required: true },
+  categories: [
+    {
+      category: { type: String, required: true },
+      objects: [
+        {
+          objectText: { type: String, required: true },
+        },
+      ],
+    },
+  ],
+  open: { type: Boolean, default: true },
+  required: { type: Boolean, default: false },
+});
+
+const CategoryQuestion = mongoose.model(
+  "CategoryQuestion",
+  categoryQuestionSchema
+);
+
 const comprehensionQuestionSchema = new mongoose.Schema({
   comprehensionText: { type: String, required: true },
   questions_list: [
@@ -77,6 +98,33 @@ app.get("/api/cloze-questions", async (req, res) => {
   try {
     const allClozeQuestions = await ClozeQuestion.find();
     res.json({ data: allClozeQuestions });
+  } catch (error) {
+    console.error("Error fetching form data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/api/category-questions", async (req, res) => {
+  const { formData } = req.body;
+  console.log("Server category post hit");
+
+  try {
+    const newCategoryQuestions = await CategoryQuestion.insertMany(formData);
+    res.json({
+      message: "Data saved successfully!",
+      data: newCategoryQuestions,
+    });
+  } catch (error) {
+    console.error("Error saving data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/api/category-questions", async (req, res) => {
+  console.log(" category Server get hit");
+  try {
+    const allCategoryQuestions = await CategoryQuestion.find();
+    res.json({ data: allCategoryQuestions });
   } catch (error) {
     console.error("Error fetching form data:", error);
     res.status(500).json({ error: "Internal Server Error" });

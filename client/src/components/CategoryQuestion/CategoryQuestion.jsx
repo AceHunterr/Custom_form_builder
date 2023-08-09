@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CategoryQuestion.css"; // Don't forget to create the CSS file
+import "./CategoryQuestion.css";
 import RichTextEditor from "../RichTextEditor";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -18,6 +18,7 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import { MenuItem } from "@material-ui/core";
 import FilterNoneIcon from "@material-ui/icons/FilterNone";
 import CloseIcon from "@material-ui/icons/Close";
+import axios from "axios";
 
 const CategoryQuestion = () => {
   const [categoryQuestion, setCategoryQuestion] = useState([
@@ -42,7 +43,18 @@ const CategoryQuestion = () => {
     },
   ]);
 
-  // Other functions and JSX components from your previous code...
+  const saveCategoryQuestions = () => {
+    axios
+      .post("http://localhost:5000/api/category-questions", {
+        formData: categoryQuestion,
+      })
+      .then((response) => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.error("Error saving data:", error);
+      });
+  };
 
   function changeQuestionText(text, i) {
     const updatedCategoryQuestion = [...categoryQuestion];
@@ -430,14 +442,14 @@ const CategoryQuestion = () => {
                     </IconButton>
                   </div>
                 </div>
-                {/* <Button
-              variant="contained"
-              color="primary"
-              onClick={savecomprehensionQuestions}
-              style={{ width: "50%" }}
-            >
-              Save Form Data
-            </Button> */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={saveCategoryQuestions}
+                  style={{ width: "50%" }}
+                >
+                  Save Form Data
+                </Button>
               </AccordionDetails>
               <div className="question_edit">
                 <AddCircleOutlineIcon
